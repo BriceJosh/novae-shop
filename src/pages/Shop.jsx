@@ -13,7 +13,7 @@ export default function Shop() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null); 
 
-  const BACKEND_URL = import.meta.env.VITE_API_URL || "http://localhost:5000"; // 👑 Centralisé pour éviter les URLs en dur dans le code
+  const BACKEND_URL = import.meta.env.VITE_API_URL || "http://localhost:5000"; 
 
   // On récupère les paramètres depuis l'URL
   const searchQuery = searchParams.get('search') || '';
@@ -167,7 +167,7 @@ export default function Shop() {
         {/* COLONNE DES PRODUITS */}
         <div className="md:col-span-9 md:border-l md:border-slate-100 md:pl-8 dark:border-slate-800">
           {isLoading ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
               {[...Array(6)].map((_, index) => <ProductSkeleton key={index} />)}
             </div>
           ) : error ? (
@@ -179,7 +179,7 @@ export default function Shop() {
               Aucun produit ne correspond à votre recherche pour la catégorie {selectedCategory}.
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
               {filteredProducts.map((product) => (
                 <ProductCard key={product._id} product={product} />
               ))}

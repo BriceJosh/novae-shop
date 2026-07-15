@@ -46,7 +46,7 @@ export default function Home() {
     fetchHomeData();
   }, []);
 
-return (
+  return (
     // Espace global réduit de 16 à 12 pour remonter le contenu
     <div className="space-y-12 pb-12 bg-slate-50/50 dark:bg-slate-950 transition-colors">
       <Hero />
@@ -58,12 +58,13 @@ return (
           <p className="text-xs text-slate-500 dark:text-slate-400">Accédez directement aux équipements de votre choix.</p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+        {/* C'est ici que j'ai ajouté le défilement horizontal fluide */}
+        <div className="flex overflow-x-auto gap-4 snap-x snap-mandatory pb-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
           {categories.map((cat) => (
             <Link 
               key={cat._id} 
               to={`/shop?category=${encodeURIComponent(cat.name)}`} 
-              className="group bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 p-3 rounded-2xl flex flex-col items-center text-center gap-2 transition-all hover:shadow-sm hover:border-blue-200 dark:hover:border-blue-800 no-underline"
+              className="flex-none w-32 snap-start group bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 p-3 rounded-2xl flex flex-col items-center text-center gap-2 transition-all hover:shadow-sm hover:border-blue-200 dark:hover:border-blue-800 no-underline"
             >
               <div className="w-14 h-14 rounded-full bg-slate-50 dark:bg-slate-800 overflow-hidden flex items-center justify-center border border-slate-100 dark:border-slate-700">
                 <img src={cat.image} alt={cat.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
@@ -82,13 +83,13 @@ return (
         </div>
 
         {isLoading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
             {[...Array(4)].map((_, index) => <ProductSkeleton key={index} />)}
           </div>
         ) : error ? (
           <div className="text-center py-10 text-red-500 font-medium">Impossible de charger la sélection.</div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
             {featuredProducts.map((product) => (
               <ProductCard key={product._id} product={product} />
             ))}

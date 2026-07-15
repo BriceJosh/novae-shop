@@ -58,12 +58,12 @@ export default function Contact() {
             </div>
             <span>Quartier Administratif, Lomé, Togo</span>
           </div>
-          <div className="flex items-center gap-4 p-5 bg-white border border-slate-100 rounded-2xl shadow-sm">
+          {/* <div className="flex items-center gap-4 p-5 bg-white border border-slate-100 rounded-2xl shadow-sm">
             <div className="w-10 h-10 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center shrink-0">
               <Phone size={20} />
             </div>
             <span>+228 90 00 00 00</span>
-          </div>
+          </div> */}
           <div className="flex items-center gap-4 p-5 bg-white border border-slate-100 rounded-2xl shadow-sm">
             <div className="w-10 h-10 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center shrink-0">
               <Mail size={20} />
