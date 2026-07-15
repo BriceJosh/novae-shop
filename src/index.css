@@ -1,0 +1,19 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Configuration du thème Novaë pour Tailwind v4 */
+@theme {
+  --color-novae-blue: #1A2332; /* Le bleu nuit profond du logo */
+  --color-novae-blue-light: #243045; /* Pour les survols en mode sombre */
+  --color-novae-gold: #E5C06B; /* L'or/jaune de ton grand N */
+  --color-novae-gold-hover: #D4AF37; /* L'or légèrement plus foncé au survol */
+}
+
+/* Polices de base pour un rendu plus propre */
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, .font-heading {
+  font-family: 'Poppins', system-ui, sans-serif;
+}
