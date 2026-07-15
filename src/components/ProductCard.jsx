@@ -60,22 +60,29 @@ export default function ProductCard({ product }) {
         </div>
       </Link>
 
-      <div className="p-5 flex-grow flex flex-col justify-between dark:bg-novae-blue dark:border-slate-800 transition-colors">
-        <div className="p-4">
+      {/* Suppression du p-5 au profit d'un p-4 plus compact */}
+      <div className="p-4 flex-grow flex flex-col justify-between dark:bg-novae-blue dark:border-slate-800 transition-colors">
+        
+        {/* Le div avec "p-4" en doublon a été supprimé ici */}
+        <div>
           <span className="text-xs font-semibold text-novae-gold tracking-wider uppercase">{product.category}</span>
           <Link to={`/product/${product._id}`}>
             <h3 className="font-heading text-base font-bold text-slate-900 mt-1 group-hover:text-novae-gold transition-colors line-clamp-2 dark:text-white">
               {product.name}
             </h3>
           </Link>
-          <div className="flex items-center gap-1 mt-2">
-            <Star size={16} className="fill-novae-gold text-novae-gold" />
+          {/* Marge supérieure réduite pour rapprocher les étoiles du titre */}
+          <div className="flex items-center gap-1 mt-1.5">
+            <Star size={15} className="fill-novae-gold text-novae-gold" />
             <span className="text-sm font-medium text-slate-600 dark:text-slate-400">{product.rating}</span>
           </div>
         </div>
 
-        <div className="flex items-center justify-between mt-4 pt-4 border-t border-slate-50 dark:border-slate-800/50">
-          <span className="text-lg font-extrabold text-slate-950 dark:text-slate-100 mt-2">{formatPrice(product.price)}</span>
+        {/* mt-4 et pt-4 réduits à mt-3 et pt-3 pour remonter la ligne de prix */}
+        <div className="flex items-center justify-between mt-3 pt-3 border-t border-slate-50 dark:border-slate-800/50">
+          
+          {/* Suppression du mt-2 qui poussait le prix vers le bas */}
+          <span className="text-lg font-extrabold text-slate-950 dark:text-slate-100">{formatPrice(product.price)}</span>
           
           {/* BOUTON MOBILE */}
           <button 
