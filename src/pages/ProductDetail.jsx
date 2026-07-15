@@ -12,7 +12,7 @@ export default function ProductDetail() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [quantity, setQuantity] = useState(1);
-  const BACKEND_URL = "http://localhost:5000"; // 👑 URL du serveur backend
+  const BACKEND_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";// 👑 URL du serveur backend
 
   useEffect(() => {
     const fetchProductDetails = async () => {

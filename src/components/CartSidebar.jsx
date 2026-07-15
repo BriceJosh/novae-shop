@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 export default function CartSidebar({ isOpen, onClose }) {
   const { cart, incrementQuantity, decrementQuantity, removeFromCart, getCartTotal } = useCart();
-  const BACKEND_URL = "http://localhost:5000"; // 👑 Permet d'unifier l'affichage des images locales
+  const BACKEND_URL = import.meta.env.VITE_API_URL || "http://localhost:5000"; // 👑 Permet d'unifier l'affichage des images locales
 
   const formatPrice = (price) => {
     return new Intl.NumberFormat('fr-FR', { 

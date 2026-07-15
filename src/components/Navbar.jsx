@@ -19,7 +19,7 @@ export default function Navbar({ onCartClick }) {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/categories');
+        const response = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/categories`);
         if (response.ok) {
           const data = await response.json();
           setCategories(data);

@@ -5,7 +5,7 @@ import { Eye } from 'lucide-react';
 export default function RecentlyViewed({ currentProductId = null }) {
   const [recentProducts, setRecentProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const BACKEND_URL = "http://localhost:5000"; // 👑 CORRIGÉ : Remplacement de window.location.origin qui cherchait sur le port 5173
+  const BACKEND_URL = import.meta.env.VITE_API_URL || "http://localhost:5000"; // 👑 CORRIGÉ : Remplacement de window.location.origin qui cherchait sur le port 5173
 
   useEffect(() => {
     const fetchRecentProducts = async () => {

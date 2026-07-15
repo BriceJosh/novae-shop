@@ -15,8 +15,8 @@ export default function Home() {
       try {
         setIsLoading(true);
         const [productsRes, categoriesRes] = await Promise.all([
-          fetch('http://localhost:5000/api/products'),
-          fetch('http://localhost:5000/api/categories')
+          fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/products`),
+          fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/categories`)
         ]);
         
         if (!productsRes.ok || !categoriesRes.ok) {

@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 export default function ProductCard({ product }) {
   const { addToCart } = useCart();
   const [isAdded, setIsAdded] = useState(false);
-  const BACKEND_URL = "http://localhost:5000"; 
+  const BACKEND_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
   const formatPrice = (price) => {
     return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'XOF', minimumFractionDigits: 0 }).format(price);

@@ -29,10 +29,10 @@ export default function AdminPage() {
 
   const fetchData = async () => {
     try {
-      const prodRes = await fetch('http://localhost:5000/api/products');
+      const prodRes = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/products`);
       if (prodRes.ok) setExistingProducts(await prodRes.json());
 
-      const catRes = await fetch('http://localhost:5000/api/categories');
+      const catRes = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/categories`);
       if (catRes.ok) {
         const categoriesData = await catRes.json();
         setExistingCategories(categoriesData);
@@ -111,9 +111,9 @@ export default function AdminPage() {
       };
 
       const url = editingProductId 
-        ? `http://localhost:5000/api/products/${editingProductId}`
-        : 'http://localhost:5000/api/products';
-      
+        ? `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/products/${editingProductId}`
+        : `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/products`;
+
       const method = editingProductId ? 'PUT' : 'POST';
 
       const res = await fetch(url, {
@@ -141,7 +141,7 @@ export default function AdminPage() {
   const handleDeleteProduct = async (id, name) => {
     if (window.confirm(`Supprimer le produit "${name}" ?`)) {
       try {
-        const res = await fetch(`http://localhost:5000/api/products/${id}`, { method: 'DELETE' });
+        const res = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/products/${id}`, { method: 'DELETE' });
         if (res.ok) {
           setStatus({ type: 'success', message: `🗑️ Produit "${name}" supprimé.` });
           if (editingProductId === id) cancelProductEdit();
@@ -184,9 +184,9 @@ export default function AdminPage() {
       const imageUrl = await uploadToCloudinary(categoryImageFile, currentCategoryImageUrl);
 
       const url = editingCategoryId 
-        ? `http://localhost:5000/api/categories/${editingCategoryId}`
-        : 'http://localhost:5000/api/categories';
-      
+        ? `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/categories/${editingCategoryId}`
+        : `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/categories`;
+
       const method = editingCategoryId ? 'PUT' : 'POST';
 
       const res = await fetch(url, {
@@ -214,7 +214,7 @@ export default function AdminPage() {
   const handleDeleteCategory = async (id, name) => {
     if (window.confirm(`Supprimer "${name}" ? (Cela n'efface pas ses produits)`)) {
       try {
-        const res = await fetch(`http://localhost:5000/api/categories/${id}`, { method: 'DELETE' });
+        const res = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/categories/${id}`, { method: 'DELETE' });
         if (res.ok) {
           setStatus({ type: 'success', message: `🗑️ Catégorie supprimée.` });
           if (editingCategoryId === id) cancelCategoryEdit();

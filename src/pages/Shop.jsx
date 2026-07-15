@@ -13,7 +13,7 @@ export default function Shop() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null); 
 
-  const BACKEND_URL = "http://localhost:5000"; // 👑 Centralisé pour éviter les URLs en dur dans le code
+  const BACKEND_URL = import.meta.env.VITE_API_URL || "http://localhost:5000"; // 👑 Centralisé pour éviter les URLs en dur dans le code
 
   // On récupère les paramètres depuis l'URL
   const searchQuery = searchParams.get('search') || '';
