@@ -68,7 +68,7 @@ export default function Contact() {
             <div className="w-10 h-10 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center shrink-0">
               <Mail size={20} />
             </div>
-            <span>contact@novae-shop.com</span>
+            <span>novaeshoping@gmail.com</span>
           </div>
         </div>
 

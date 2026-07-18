@@ -92,7 +92,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Mail size={18} className="text-blue-600 shrink-0" />
-                <span>contact@novae-shop.com</span>
+                <span>novaeshoping@gmail.com</span>
               </li>
             </ul>
           </div>
