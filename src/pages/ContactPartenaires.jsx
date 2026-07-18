@@ -26,9 +26,9 @@ export default function ContactPartenaires() {
     setError(null);
 
     // ⚠️ REMPLACE CES TROIS VALEURS PAR TES IDENTIFIANTS EMAILJS
-    const SERVICE_ID = "service_7eh8c5o";
+    const SERVICE_ID = "service_9qeyx6f";
     const TEMPLATE_ID = "template_cp6plae";
-    const PUBLIC_KEY = "2Bfzz4IESOhUclN42";
+    const PUBLIC_KEY = "U1mY1rhjtcmNCIw76";
 
     // Les variables qui doivent correspondre aux {{tags}} de ton modèle EmailJS
     const templateParams = {

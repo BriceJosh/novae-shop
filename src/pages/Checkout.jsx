@@ -3,6 +3,7 @@ import { useCart } from '../context/CartContext';
 import { Link } from 'react-router-dom';
 import { ShoppingBag, MessageSquare, ArrowLeft, CheckCircle2 } from 'lucide-react';
 import RecentlyViewed from '../components/RecentlyViewed'; // Importation de l'historique
+import emailjs from '@emailjs/browser'; // IMPORTATION DE EMAILJS
 
 export default function Checkout() {
   const { cart, getCartTotal, clearCart } = useCart();
@@ -16,6 +17,9 @@ export default function Checkout() {
     city: '',
     phone: ''
   });
+
+  // URL du backend pour s'assurer que les images s'affichent si elles ne sont pas des liens Cloudinary absolus
+  const BACKEND_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
   // NUMÉRO DE TÉLÉPHONE ICI (avec l'indicatif pays, sans le "+")
   const WHATSAPP_NUMBER = '22871460429'; 
@@ -32,7 +36,48 @@ export default function Checkout() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // 1. Construire le texte du message pour WhatsApp
+    // ==========================================
+    // 1. ENVOI DE L'E-MAIL AVEC IMAGES (EMAILJS)
+    // ==========================================
+    
+    // Génération du HTML pour afficher les miniatures dans ton mail
+    const orderHTML = cart.map(item => {
+      const imageUrl = item.image.startsWith('http') ? item.image : `${BACKEND_URL}${item.image}`;
+      return `
+        <div style="display: flex; align-items: center; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
+          <img src="${imageUrl}" alt="${item.name}" style="width: 70px; height: 70px; object-fit: cover; border-radius: 8px; margin-right: 15px;" />
+          <div>
+            <h4 style="margin: 0; color: #333; font-family: sans-serif;">${item.name}</h4>
+            <p style="margin: 5px 0 0 0; color: #666; font-size: 14px; font-family: sans-serif;">
+              Quantité : ${item.quantity} | Prix total : ${formatPrice(item.price * item.quantity)}
+            </p>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    const templateParams = {
+      nom_client: `${formData.firstName} ${formData.lastName}`,
+      contact_client: formData.phone,
+      total_commande: formatPrice(getCartTotal()),
+      details_commande: orderHTML
+    };
+
+    // Appel à EmailJS (Remplacer les clés ici !)
+    emailjs.send(
+      'service_9qeyx6f', 
+      'template_s86xo8e', 
+      templateParams, 
+      'U1mY1rhjtcmNCIw76'
+    ).then((response) => {
+      console.log('E-mail avec images envoyé avec succès !', response.status, response.text);
+    }).catch((err) => {
+      console.error('Erreur lors de l\'envoi de l\'e-mail...', err);
+    });
+
+    // ==========================================
+    // 2. REDIRECTION VERS WHATSAPP (TON CODE)
+    // ==========================================
     let message = `*Nouvelle commande sur NOVAË.*\n\n`;
     message += `*Client :* ${formData.firstName} ${formData.lastName}\n`;
     message += `*Téléphone :* ${formData.phone}\n`;
@@ -47,14 +92,11 @@ export default function Checkout() {
     message += `\n*TOTAL COMMANDE :* ${formatPrice(getCartTotal())}\n\n`;
     message += `Merci de me confirmer la prise en charge et les modalités de livraison !`;
 
-    // 2. Encoder le message pour l'URL
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
 
-    // 3. Ouvrir WhatsApp dans un nouvel onglet
     window.open(whatsappUrl, '_blank');
 
-    // 4. Valider l'état local et vider le panier
     setIsOrdered(true);
     clearCart();
   };

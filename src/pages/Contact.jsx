@@ -14,9 +14,9 @@ export default function Contact() {
     setError(null);
 
     // ⚠️ Remplace par tes clés EmailJS (Utilise ton nouveau Template ID ici)
-    const SERVICE_ID = "service_7eh8c5o";
+    const SERVICE_ID = "service_9qeyx6f";
     const TEMPLATE_ID = "template_cp6plae"; 
-    const PUBLIC_KEY = "2Bfzz4IESOhUclN42";
+    const PUBLIC_KEY = "U1mY1rhjtcmNCIw76";
 
     const templateParams = {
       from_name: emailData.name,
